@@ -11,6 +11,10 @@
             $this->db = new DB();
             $this->route = new Route();
         }
+
+        public function route() {
+            return $this->route;
+        }
     }
 
 ?>

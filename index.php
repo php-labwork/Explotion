@@ -16,4 +16,9 @@
     use MVC\Config\Core as Core;
 
     $core = new Core();
+    $route = $core->route();
+
+    // Route Configuration
+    include_once "apps/web.php";
+    $route->call();
 ?>
