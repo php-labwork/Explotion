@@ -6,7 +6,9 @@
     $configs = array(
         "./config/core",
         "./config/route",
-        "./config/db"
+        "./config/db",
+        "./config/controller",
+        "./config/request"
     );
     foreach($configs as $item) {
         include_once $item . ".php";
