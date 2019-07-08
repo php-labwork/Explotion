@@ -1,6 +1,5 @@
 <?php
     namespace MVC\Config;
-    use MVC\Config\Request;
 
     class Controller{
         private $views, $models, $assets, $inputs;
@@ -13,13 +12,16 @@
         }
 
         // Loader
-        private function load($fileName) {
+        private function load($fileName, $data=array()) {
+            if (count($data) > 0) {
+                extract($data, EXTR_PREFIX_SAME, "wddx");
+            }
             include_once $fileName;
         }
 
         // Load View
-        protected function view($viewName) {
-            $this->load($this->views . $viewName . ".php");
+        protected function view($viewName, $data=array()) {
+            $this->load($this->views . $viewName . ".php", $data);
         }
 
         // Load Model

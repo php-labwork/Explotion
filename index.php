@@ -8,6 +8,7 @@
         "./config/route",
         "./config/db",
         "./config/controller",
+        "./config/model",
         "./config/request"
     );
     foreach($configs as $item) {
