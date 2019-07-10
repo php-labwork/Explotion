@@ -2,9 +2,10 @@
     namespace MVC\Config;
 
     class Controller{
-        private $views, $models, $assets, $inputs;
+        private $apps, $views, $models, $assets, $inputs;
         public function __construct() {
             // Empty Constructor
+            $this->apps = "apps/";
             $this->views = "apps/views/";
             $this->models = "apps/models/";
             $this->assets = "apps/assets/";
@@ -40,6 +41,11 @@
         // Form Parameter
         protected function input() {
             return $this->inputs;
+        }
+
+        // Uri 
+        protected function uri($route) {
+            return $GLOBALS["base_url"] . "?p=" . $route;
         }
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
     $route->get("/", "welcome@index");
-    $route->get("/detail", "welcome@detail", array(
+    $route->get("/tutorial", "tutorial@index", array(
         "id"
     ));
 ?>

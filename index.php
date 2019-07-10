@@ -23,5 +23,6 @@
 
     // Route Configuration
     include_once "apps/web.php";
+    include_once "apps/config.php";
     $route->call();
 ?>

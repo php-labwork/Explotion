@@ -18,7 +18,7 @@
         <h2>Welcome To Simple MVC</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi eaque, a, fuga nobis consequuntur minima doloribus necessitatibus asperiores ipsa enim voluptatum. Est nostrum dolorem quam ullam odit blanditiis. Officiis, voluptatem.</p>
         <p>
-            <button class="w3-btn w3-blue w3-round">Start Tutorial</button>
+            <button class="w3-btn w3-blue w3-round" onclick="location.assign('<?= $this->uri('/tutorial/introduction'); ?>')">Start Tutorial</button>
         </p>
     </div>
 </body>
