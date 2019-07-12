@@ -8,8 +8,7 @@
             $this->routes = array(
                 "get" => array(),
                 "post" => array(),
-                "put" => array(),
-                "delete" => array()
+                "put" => array()
             );
         }
 
@@ -46,7 +45,7 @@
          * If You Need Route With Data Params: @uri, @route, @data
          */
         public function delete($uri, $route, $data=array()) {
-            $this->addRoute("delete", $uri, $route, $data);
+            $this->addRoute("get", $uri, $route, $data);
         }
 
         private function addRoute($method, $uri, $route, $data=array()) {
