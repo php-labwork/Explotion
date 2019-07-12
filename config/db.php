@@ -50,7 +50,7 @@
             $value = array();
             foreach($values as $key => $data) {
                 array_push($column, $key);
-                array_push($value, $data);
+                array_push($value, "'" . $data . "'");
             }
             $this->query["insert"] = "INSERT INTO " . $tableName . " (" . implode(', ', $column) . ") VALUES (" . implode(', ', $value) . ")";
             return $this->query();
@@ -70,6 +70,11 @@
         public function delete($tableName) {
             $this->query["delete"] = "DELETE FROM " . $tableName;
             return $this->query();
+        }
+
+        // Order By Argument
+        public function order_by($by, $direction) {
+            $this->query["order_by"] = "ORDER BY " . $by . " " . $direction;
         }
 
         // Execute Query
