@@ -47,5 +47,10 @@
         protected function uri($route) {
             return $GLOBALS["base_url"] . "?p=" . $route;
         }
+
+        // CSRF Token
+        protected function _csrf() {
+            return md5(date("Y-m-d H:i:s"));
+        }
     }
 ?>
