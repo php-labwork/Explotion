@@ -15,6 +15,14 @@
         include_once $item . ".php";
     }
 
+    // Libs Array
+    $libs = array(
+        "./apps/libs/oauth2"
+    );
+    foreach($libs as $item) {
+        include_once $item . ".php";
+    }
+
     // Call Core Config
     use MVC\Config\Core as Core;
 
