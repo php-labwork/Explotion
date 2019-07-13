@@ -45,7 +45,7 @@
          * If You Need Route With Data Params: @uri, @route, @data
          */
         public function delete($uri, $route, $data=array()) {
-            $this->addRoute("get", $uri, $route, $data);
+            $this->addRoute("delete", $uri, $route, $data);
         }
 
         private function addRoute($method, $uri, $route, $data=array()) {
@@ -62,7 +62,7 @@
                         array(
                             "uri" => $uri, 
                             "route" =>$route,
-                            "params" => ""
+                            "params" => array()
                         ));
                 }
                 else {
@@ -96,31 +96,52 @@
                                 $ref = new \ReflectionClass(ucfirst($fileName));
                                 $obj = $ref->newInstance();
                                 $obj->$methodName();
-                                break;
                             }
                         }
                     }
                     else {
+                        $status = false;
                         foreach($this->routes[$this->checkMethod()] as $item) {
-                            if ($item["uri"] == "/" . $uriSegment[1]) {
-                                // Add Params Value
-                                $uriDataID = 0;
-                                $newUriData = array();
-                                foreach($uriSegment as $uriIndex => $uriValue) {
-                                    if ($uriIndex < 2) continue;
-                                    $newUriData[$item["params"][$uriDataID]] = $uriValue;
-                                    $uriDataID++;
+                            $status = false;
+                            if (strpos($uri, $item["uri"]) > -1 && $item["uri"] != "/") {
+                                $status = true;
+                                if (count($item["params"]) == 0) {
+                                    $fileName = strtolower(explode("@", $item["route"])[0]);
+                                    $methodName = explode("@", $item["route"])[1];
+                                    include_once "apps/controllers/".$fileName.".php";
+                                    $ref = new \ReflectionClass(ucfirst($fileName));
+                                    $obj = $ref->newInstance();
+                                    $obj->$methodName();
+                                    break;
                                 }
+                                else {
+                                    // Add Params Value
+                                    $uriDataID = 0;
+                                    $newUriData = array();
+                                    $maxIndex = count(explode("/", $item["uri"]));
+                                    foreach($uriSegment as $uriIndex => $uriValue) {
+                                        if ($uriIndex < $maxIndex) continue;
+                                        $newUriData[$item["params"][$uriDataID]] = $uriValue;
+                                        $uriDataID++;
+                                    }
 
-                                // Call Method
-                                $fileName = strtolower(explode("@", $item["route"])[0]);
-                                $methodName = explode("@", $item["route"])[1];
-                                include_once "apps/controllers/".$fileName.".php";
-                                $ref = new \ReflectionClass(ucfirst($fileName));
-                                $obj = $ref->newInstance();
-                                $obj->$methodName($newUriData);
-                                break;
+                                    // Call Method
+                                    $fileName = strtolower(explode("@", $item["route"])[0]);
+                                    $methodName = explode("@", $item["route"])[1];
+                                    include_once "apps/controllers/".$fileName.".php";
+                                    $ref = new \ReflectionClass(ucfirst($fileName));
+                                    $obj = $ref->newInstance();
+                                    $obj->$methodName($newUriData);
+                                    break;
+                                }
                             }
+                        }
+
+                        if (!$status) {
+                            include_once "apps/controllers/error.php";
+                            $ref = new \ReflectionClass("Error");
+                            $obj = $ref->newInstance();
+                            $obj->_not_found();
                         }
                     }
                 }

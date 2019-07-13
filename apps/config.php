@@ -1,3 +1,3 @@
 <?php
-    $GLOBALS["base_url"] = "http://localhost/mvc/"; // Your Base Url
+    $GLOBALS["base_url"] = "http://localhost/explotion/"; // Your Base Url
 ?>
