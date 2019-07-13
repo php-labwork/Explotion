@@ -1,4 +1,4 @@
-# mvc
+# Explotion Framework
 An Example MVC Core In PHP
 ## Preparation Before Use It
 1. You must have host with apache version 2.4.xx VC11 Or More Than It
